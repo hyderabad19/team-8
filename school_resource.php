@@ -23,20 +23,20 @@ session_start();
 $con = mysqli_connect("localhost","root","","school") or die("cannot connect server ");
 if($con->connect_error)
    echo "Error in connecting";
- 
+ echo $_SESSION['id'];
 if(isset($_POST["add"]))
 {
    $R_name = $_POST['add_resource_name'];
    $S_name = $_SESSION['id'];
-   $query = "insert into total_resources values('$R_name','$S_name','F','F','F','F','F','F','F','F','F');";
+ 
+   $query = "insert into total_resources(resource_name,school_id,T8to9,T9to10,T10to11,T11to12,T12to1,T1to2,T2to3,T3to4,T4to5) values('$R_name','$S_name','F','F','F','F','F','F','F','F','F');";
    if(mysqli_query($con,$query))
 	   echo '<script type="text/javascript">',
 					'alert("Data Inserted Successfully");',
 					'</script>';
-   else echo "Failed";
-	   //echo '<script type="text/javascript">',
-					//'alert("Data Insertion Failed");',
-					//'</script>';
+   else echo '<script type="text/javascript">',
+					'alert("Data Insertion Failed");',
+					'</script>';
 }
 if(isset($_POST["update"]))
 {
