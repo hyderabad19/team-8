@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>School Registration</title>
+  <title>Registration for School</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -14,10 +14,10 @@
 $con = mysqli_connect("localhost","root","","school") or die("cannot connect server ");
 if($con->connect_error)
    echo "Error in connecting";
-else echo "DB connected";
+
 if(isset($_POST["register"]))
 {
-    echo "in submit";
+    
     $name = $_POST['name'];
     $pass = $_POST['pwd'];
     $email = $_POST['email'];
@@ -52,8 +52,7 @@ if(isset($_POST["register"]))
     $query = "insert into regschool(NAME,PINCODE,EMAIL,PASSWORD,ADDRESS,CITY) values('$name','$pin','$email','$pass','$addr','$city')";
     if(mysqli_query($con,$query))
         echo "<h3>You have registered</h3>";
-    else echo "Failed Registration";
-
+    
 }
 
 ?>
