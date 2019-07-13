@@ -42,8 +42,11 @@ if(isset($_POST["update"]))
 {
 	$R_name = $_POST['update_resource_name'];
 	$id = $_SESSION['id'];
+	echo $id;
 	if($_POST["time_slot_available"] && $_POST["time_slot_block"])
 	{
+		$ts=$_POST["time_slot_available"];
+		$ts1=$_POST["time_slot_block"];
 		if($_POST["time_slot_available"] == $_POST["time_slot_block"])
 		{
 			echo '<script type="text/javascript">',
@@ -51,114 +54,24 @@ if(isset($_POST["update"]))
 					'</script>';
 		}
 		else{
-		$ts1=$_POST["time_slot_available"];
-		 if($ts1=="T8to9")
-	  $query = "UPDATE total_resources SET T8to9 = 'T' WHERE school_id = $id;";
-   if($ts1=="T9to10")
-	   $query = "UPDATE total_resources SET T9to10 = 'T' WHERE school_id = $id;";
-   if($ts1=="T10to11")
-	   $query = "UPDATE total_resources SET T10to11 = 'T' WHERE school_id = $id;";
-	   
-   if($ts1=="T11to12")
-	   $query = "UPDATE total_resources SET T11to12 = 'T' WHERE school_id = $id;";
-	   
-   if($ts1=="T12to1")
-	   $query = "UPDATE total_resources SET T12to1 = 'T' WHERE school_id = $id;";
-	   
-   if($ts1=="T1to2")
-	   $query = "UPDATE total_resources SET T1to2 = 'T' WHERE school_id = $id;";
-	   
-   if($ts1=="T2to3")
-	   $query = "UPDATE total_resources SET T2to3 = 'T' WHERE school_id = $id;";
-	   
-   if($ts1=="T3to4")
-	  $query = "UPDATE total_resources SET T3to4 = 'T' WHERE school_id = $id;";
-   if($ts1=="T4to5")
-	   $query = "UPDATE total_resources SET T4to5 = 'T' WHERE school_id = $id;";
-   
-   	$ts=$_POST["time_slot_block"];
-		  if($ts=="T8to9")
-	  $query = "UPDATE total_resources SET T8to9 = 'F' WHERE school_id = $id;";
-   if($ts=="T9to10")
-	   $query = "UPDATE total_resources SET T9to10 = 'F' WHERE school_id = $id;";
-   if($ts=="T10to11")
-	   $query = "UPDATE total_resources SET T10to11 = 'F' WHERE school_id = $id;";
-	   
-   if($ts=="T11to12")
-	   $query = "UPDATE total_resources SET T11to12 = 'F' WHERE school_id = $id;";
-	   
-   if($ts=="T12to1")
-	   $query = "UPDATE total_resources SET T12to1 = 'F WHERE school_id = $id;";
-	   
-   if($ts=="T1to2")
-	   $query = "UPDATE total_resources SET T1to2 = 'F' WHERE school_id = $id;";
-	   
-   if($ts=="T2to3")
-	   $query = "UPDATE total_resources SET T2to3 = 'F' WHERE school_id = $id;";
-	   
-   if($ts=="T3to4")
-	  $query = "UPDATE total_resources SET T3to4 = 'F' WHERE school_id = $id;";
-   if($ts=="T4to5")
-	   $query = "UPDATE total_resources SET T4to5 = 'F' WHERE school_id = $id;";
+	
+	$query = "UPDATE total_resources SET ".$ts." = 'T' WHERE school_id = $id;";
+	mysqli_query($con,$query);
+	$query = "UPDATE total_resources SET ".$ts1." = 'F' WHERE school_id = $id;";
 		}
 		
 	}else if($_POST["time_slot_available"])
 	{
-		$ts=$_POST["time_slot_available"];
-		 if($ts=="T8to9")
-	  $query = "UPDATE total_resources SET T8to9 = 'T' WHERE school_id = $id;";
-   if($ts=="T9to10")
-	   $query = "UPDATE total_resources SET T9to10 = 'T' WHERE school_id = $id;";
-   if($ts=="T10to11")
-	   $query = "UPDATE total_resources SET T10to11 = 'T' WHERE school_id = $id;";
-	   
-   if($ts=="T11to12")
-	   $query = "UPDATE total_resources SET T11to12 = 'T' WHERE school_id = $id;";
-	   
-   if($ts=="T12to1")
-	   $query = "UPDATE total_resources SET T12to1 = 'T' WHERE school_id = $id;";
-	   
-   if($ts=="T1to2")
-	   $query = "UPDATE total_resources SET T1to2 = 'T' WHERE school_id = $id;";
-	   
-   if($ts=="T2to3")
-	   $query = "UPDATE total_resources SET T2to3 = 'T' WHERE school_id = $id;";
-	   
-   if($ts=="T3to4")
-	  $query = "UPDATE total_resources SET T3to4 = 'T' WHERE school_id = $id;";
-   if($ts=="T4to5")
-	   $query = "UPDATE total_resources SET T4to5 = 'T' WHERE school_id = $id;";
-	
+	  $ts=$_POST["time_slot_available"];
+	  $query = "UPDATE total_resources SET ".$ts."= 'T' WHERE school_id = $id;";
 	}
 	else if($_POST["time_slot_block"])
 	{
-		
 		$ts=$_POST["time_slot_block"];
-		  if($ts=="T8to9")
-	  $query = "UPDATE total_resources SET T8to9 = 'F' WHERE school_id = $id;";
-   if($ts=="T9to10")
-	   $query = "UPDATE total_resources SET T9to10 = 'F' WHERE school_id = $id;";
-   if($ts=="T10to11")
-	   $query = "UPDATE total_resources SET T10to11 = 'F' WHERE school_id = $id;";
-	   
-   if($ts=="T11to12")
-	   $query = "UPDATE total_resources SET T11to12 = 'F' WHERE school_id = $id;";
-	   
-   if($ts=="T12to1")
-	   $query = "UPDATE total_resources SET T12to1 = 'F WHERE school_id = $id;";
-	   
-   if($ts=="T1to2")
-	   $query = "UPDATE total_resources SET T1to2 = 'F' WHERE school_id = $id;";
-	   
-   if($ts=="T2to3")
-	   $query = "UPDATE total_resources SET T2to3 = 'F' WHERE school_id = $id;";
-	   
-   if($ts=="T3to4")
-	  $query = "UPDATE total_resources SET T3to4 = 'F' WHERE school_id = $id;";
-   if($ts=="T4to5")
-	   $query = "UPDATE total_resources SET T4to5 = 'F' WHERE school_id = $id;";
+		$query = "UPDATE total_resources SET ".$ts." = 'F' WHERE school_id = $id;";		  
 	}
-  if($query && mysqli_query($con,$query))
+ echo $query; 
+  if(mysqli_query($con,$query))
 	 echo '<script type="text/javascript">',
 					'alert("Updated Successfully");',
 					'</script>';
