@@ -7,6 +7,17 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script>
+     function validateForm() {
+		console.log("Entered Validation\n");
+		var x = document.forms["login_form"]["email"].value;
+		var y = document.forms["login_form"]["pwd"].value;
+		if (x.length==0 || y.length==0) {
+		alert("Fields must be filled out");
+    return false;
+  }
+}
+  </script>
 </head>
 <body>
 <?php
@@ -18,19 +29,19 @@ if(isset($_POST["login"]))
     $pass = $_POST['pwd'];
     $email = $_POST['email'];
     //$query = "insert into regschool(NAME,PINCODE,EMAIL,PASSWORD,ADDRESS,CITY) values('$name','$pin','$email','$pass','$addr','$city')";
-    $query = "select * from regschool";
+    $query = "select * from regschool where EMAIL='$email' and PASSWORD='$pass'";
 	$res=mysqli_query($con,$query);
 	$res = mysqli_num_rows($res);
+	//Comments
 	if($res>0)
-	{
 		echo "Successfully Logged In<br/>";
-	}else echo "Authentication Failed<br/>";
+	else echo "Authentication Failed<br/>";
 }
 
 ?>
 <div class="container">
   <h2><center>Login Here!</center></h2>
-  <form class="form-horizontal" action="school_login.php" method="POST">
+  <form name="login_form" class="form-horizontal" action="school_login.php" method="POST">
     <div class="form-group">
       <label class="control-label col-sm-2" for="email">Email:</label>
       <div class="col-sm-10">
@@ -47,7 +58,7 @@ if(isset($_POST["login"]))
     
     <div class="form-group">
      <div class="col-sm-offset-2 col-sm-10">
-        <input type="submit" name="login" class="btn btn-default" >
+        <input type="submit" name="login" class="btn btn-default" onclick="validateForm()">
       </div>
     </div>
   </form>
