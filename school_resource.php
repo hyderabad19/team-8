@@ -28,15 +28,15 @@ if(isset($_POST["add"]))
 {
    $R_name = $_POST['add_resource_name'];
    $S_name = $_SESSION['id'];
-   $query = "insert into total_resources(resource_name,school_id,T8to9,T9to10,T10to11,T11to12,T12to1,T1to2,T2to3,T3to4) values('$R_name','$S_name','F','F','F','F','F','F','F','F','F');";
+   $query = "insert into total_resources values('$R_name','$S_name','F','F','F','F','F','F','F','F','F');";
    if(mysqli_query($con,$query))
 	   echo '<script type="text/javascript">',
 					'alert("Data Inserted Successfully");',
 					'</script>';
-   else 
-	   echo '<script type="text/javascript">',
-					'alert("Data Insertion Failed");',
-					'</script>';
+   else echo "Failed";
+	   //echo '<script type="text/javascript">',
+					//'alert("Data Insertion Failed");',
+					//'</script>';
 }
 if(isset($_POST["update"]))
 {
@@ -213,7 +213,7 @@ if(isset($_POST["delete"]))
             </ul>
         </div>
     </nav>
-<form action="school_resource_update.php" name="operations1" method="POST">
+<form name="operations1" method="POST">
     <div class="container">
         <div class="row" style="margin-top: 25px;">
             <div class="col-sm-12 col-md-12">
@@ -237,7 +237,7 @@ if(isset($_POST["delete"]))
         </div>
     </div>
  </form>  
-<form action="school_resource_update.php" name="operations2" method="POST">
+<form name="operations2" method="POST">
 	<div class="container">
         <div class="row" style="margin-top: 25px;">
             <div class="col-sm-12 col-md-12">
@@ -253,7 +253,8 @@ if(isset($_POST["delete"]))
 							 <div class="form-group col-md-12 col-sm-124">
                                 <label for="inputState">Set the slot to make available</label>
                                 <select id="inputState" class="form-control" name="time_slot_available">
-									<option value="">--Select--</option>
+								<option value="">--Select--</option>
+                                
                                     <option value="T8to9">8-9</option>
                                     <option value="T9to10">9-10</option>
                                     <option value="T10to11">10-11</option>
@@ -265,11 +266,13 @@ if(isset($_POST["delete"]))
                                     <option value="T4to5">4-5</option>
                                 </select>
                             </div>
+							
+                           
 							 <div class="form-group col-md-12 col-sm-124">
                                 <label for="inputState">Set the slot to block</label>
                                 <select id="inputState" class="form-control" name="time_slot_block">
-								    <option value="">--Select--</option>
-                                    <option value="T8to9">8-9</option>
+								  <option value="">--Select--</option>
+								<option value="T8to9">8-9</option>
                                     <option value="T9to10">9-10</option>
                                     <option value="T10to11">10-11</option>
                                     <option value="T11to12">11-12</option>
@@ -291,7 +294,7 @@ if(isset($_POST["delete"]))
     </div>
     
 	</form>
-	<form action="school_resource_update.php" name="operations3" method="POST">
+	<form name="operations3" method="POST">
 	<div class="container">
         <div class="row" style="margin-top: 25px;">
             <div class="col-sm-12 col-md-12">
