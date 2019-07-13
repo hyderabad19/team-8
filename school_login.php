@@ -44,7 +44,7 @@ if(isset($_POST["login"]))
 ?>
 <div class="container">
   <h2><center>Login Here!</center></h2>
-  <form name="login_form" class="form-horizontal" action="school_resource_update.php" method="POST">
+  <form name="login_form" class="form-horizontal" action="school_resource.php" method="POST">
     <div class="form-group">
       <label class="control-label col-sm-2" for="email">Email:</label>
       <div class="col-sm-10">
