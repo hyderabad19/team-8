@@ -1,3 +1,4 @@
+    
 <html>
 
 <head>
@@ -23,26 +24,30 @@ session_start();
 $con = mysqli_connect("localhost","root","","school") or die("cannot connect server ");
 if($con->connect_error)
    echo "Error in connecting";
- echo $_SESSION['id'];
+ 
 if(isset($_POST["add"]))
 {
    $R_name = $_POST['add_resource_name'];
    $S_name = $_SESSION['id'];
- 
+   $S_name =1;
+  
    $query = "insert into total_resources(resource_name,school_id,T8to9,T9to10,T10to11,T11to12,T12to1,T1to2,T2to3,T3to4,T4to5) values('$R_name','$S_name','F','F','F','F','F','F','F','F','F');";
+  
    if(mysqli_query($con,$query))
 	   echo '<script type="text/javascript">',
 					'alert("Data Inserted Successfully");',
 					'</script>';
-   else echo '<script type="text/javascript">',
-					'alert("Data Insertion Failed");',
-					'</script>';
+   
+	   //echo '<script type="text/javascript">',
+					//'alert("Data Insertion Failed");',
+					//'</script>';
 }
 if(isset($_POST["update"]))
 {
 	$R_name = $_POST['update_resource_name'];
 	$id = $_SESSION['id'];
-	echo $id;
+	$id=1;
+	
 	if($_POST["time_slot_available"] && $_POST["time_slot_block"])
 	{
 		$ts=$_POST["time_slot_available"];
@@ -69,8 +74,7 @@ if(isset($_POST["update"]))
 	{
 		$ts=$_POST["time_slot_block"];
 		$query = "UPDATE total_resources SET ".$ts." = 'F' WHERE school_id = $id;";		  
-	}
- echo $query; 
+	} 
   if(mysqli_query($con,$query))
 	 echo '<script type="text/javascript">',
 					'alert("Updated Successfully");',
@@ -98,7 +102,7 @@ if(isset($_POST["delete"]))
 ?>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Welcome, school name</a>
+        <a class="navbar-brand" href="#">Welcome </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -106,9 +110,7 @@ if(isset($_POST["delete"]))
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item ">
-                    <a class="nav-link" href="#">Profile<span class="sr-only">(current)</span></a>
-                </li>
+
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -116,12 +118,12 @@ if(isset($_POST["delete"]))
                         Resource
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="bookslot.html">Book a slot</a>
-                        <a class="dropdown-item" href="school_resource_update.php">Update resources</a>
+                        <a class="dropdown-item" href="bookings.php">Book a slot</a>
+                        <a class="dropdown-item" href="school_resource.php">Update resources</a>
                     </div>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">Logout</a>
+                    <a class="nav-link" href="title.html">Logout</a>
                 </li>
             </ul>
         </div>
@@ -227,10 +229,10 @@ if(isset($_POST["delete"]))
 									echo "Error in connecting";
 								 }
 								 $query ="select resource_name from total_resources;";
-								 echo "$query";
+								 console.log($query);
 								 $query = mysqli_query($con,$query);
-								 $query = mysqli_fetch_row($query);								   
-								 foreach($query as $q)
+								 $query1 = mysqli_fetch_row($query);								   
+								 foreach($query1 as $q)
 								 {
 									 echo "<option value=\"$q\">$q</option>";
 								 }
@@ -260,3 +262,4 @@ if(isset($_POST["delete"]))
 </body>
 
 </html>
+
