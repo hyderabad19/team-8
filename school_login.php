@@ -4,23 +4,47 @@
   <title>School Login</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <script>
-     function validateForm() {
-		console.log("Entered Validation\n");
-		var x = document.forms["login_form"]["email"].value;
-		var y = document.forms["login_form"]["pwd"].value;
-		if (x.length==0 || y.length==0) {
-		alert("Fields must be filled out");
-    return false;
-  }
-}
-  </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Welcome </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+				<li class="nav-item ">
+                    <a class="nav-link" href="school_register.php">Register</a>
+                </li>
+				<li class="nav-item ">
+                    <a class="nav-link" href="school_login.php">Login</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="title.html">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 <?php
+session_start();
 $con = mysqli_connect("localhost","root","","school") or die("cannot connect server ");
 if($con->connect_error)
    echo "Error in connecting";
@@ -29,22 +53,19 @@ if(isset($_POST["login"]))
     $pass = $_POST['pwd'];
     $email = $_POST['email'];
     //$query = "insert into regschool(NAME,PINCODE,EMAIL,PASSWORD,ADDRESS,CITY) values('$name','$pin','$email','$pass','$addr','$city')";
-    $query = "select id from regschool where EMAIL='$email' and PASSWORD='$pass'";
+    $query = "select * from regschool";
 	$res=mysqli_query($con,$query);
-	$res1 = mysqli_num_rows($res);
-	//Comments
-	if($res1>0)
+	$res = mysqli_num_rows($res);
+	if($res>0)
+	{
 		echo "Successfully Logged In<br/>";
-	else echo "Authentication Failed<br/>";
-	$res1 = mysqli_fetch_row($res);
-	session_start();
-	$_SESSION['id']=$res1[0];
+	}else echo "Authentication Failed<br/>";
+	
 }
-
 ?>
 <div class="container">
   <h2><center>Login Here!</center></h2>
-  <form name="login_form" class="form-horizontal" action="school_resource.php" method="POST">
+  <form class="form-horizontal" action="school_resource.php" method="POST">
     <div class="form-group">
       <label class="control-label col-sm-2" for="email">Email:</label>
       <div class="col-sm-10">
@@ -61,7 +82,7 @@ if(isset($_POST["login"]))
     
     <div class="form-group">
      <div class="col-sm-offset-2 col-sm-10">
-        <input type="submit" name="login" class="btn btn-default" onclick="validateForm()">
+        <input type="submit" name="login" class="btn btn-default" >
       </div>
     </div>
   </form>
