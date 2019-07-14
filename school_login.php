@@ -29,19 +29,22 @@ if(isset($_POST["login"]))
     $pass = $_POST['pwd'];
     $email = $_POST['email'];
     //$query = "insert into regschool(NAME,PINCODE,EMAIL,PASSWORD,ADDRESS,CITY) values('$name','$pin','$email','$pass','$addr','$city')";
-    $query = "select * from regschool where EMAIL='$email' and PASSWORD='$pass'";
+    $query = "select id from regschool where EMAIL='$email' and PASSWORD='$pass'";
 	$res=mysqli_query($con,$query);
-	$res = mysqli_num_rows($res);
+	$res1 = mysqli_num_rows($res);
 	//Comments
-	if($res>0)
+	if($res1>0)
 		echo "Successfully Logged In<br/>";
 	else echo "Authentication Failed<br/>";
+	$res1 = mysqli_fetch_row($res);
+	session_start();
+	$_SESSION['id']=$res1[0];
 }
 
 ?>
 <div class="container">
   <h2><center>Login Here!</center></h2>
-  <form name="login_form" class="form-horizontal" action="school_login.php" method="POST">
+  <form name="login_form" class="form-horizontal" action="school_resource_update.php" method="POST">
     <div class="form-group">
       <label class="control-label col-sm-2" for="email">Email:</label>
       <div class="col-sm-10">
